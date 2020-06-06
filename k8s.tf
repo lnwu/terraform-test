@@ -5,12 +5,12 @@ variable "availability_zone" {
 }
 
 resource "tencentcloud_vpc" "biancheng101-vpc" {
-  name       = "编程101VPC"
+  name       = "测试VPC"
   cidr_block = "10.0.0.0/16"
 }
 
 resource "tencentcloud_subnet" "biancheng101-vpv-subnet" {
-  name              = "编程101VPC子网"
+  name              = "测试VPC子网"
   availability_zone = var.availability_zone
   vpc_id            = tencentcloud_vpc.biancheng101-vpc.id
   cidr_block        = "10.0.0.0/28"
@@ -23,8 +23,7 @@ resource "tencentcloud_key_pair" "ssh" {
 
 
 resource "tencentcloud_kubernetes_cluster" "biancheng101_cluster" {
-  cluster_name            = "编程101"
-  cluster_desc            = "编程101描述"
+  cluster_name            = "测试集群"
   vpc_id                  = tencentcloud_vpc.biancheng101-vpc.id
   cluster_cidr            = "192.168.0.0/16"
   cluster_max_pod_num     = 32
