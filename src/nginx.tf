@@ -76,12 +76,3 @@ resource "kubernetes_config_map" "nginx-config" {
   }
 }
 
-resource "kubernetes_config_map" "nginx-config" {
-  metadata {
-    name = "nginx-config"
-  }
-
-  data = {
-    "nginx.conf" = "${file("${path.module}/nginx.conf")}"
-  }
-}
