@@ -4,21 +4,21 @@ variable "availability_zone" {
   default = "ap-guangzhou-3"
 }
 
-resource "tencentcloud_vpc" "biancheng101-vpc" {
+resource "tencentcloud_vpc" "test-vpc" {
   name       = "测试VPC"
   cidr_block = "10.0.0.0/16"
 }
 
-resource "tencentcloud_subnet" "biancheng101-vpv-subnet" {
+resource "tencentcloud_subnet" "test-vpv-subnet" {
   name              = "测试VPC子网"
   availability_zone = var.availability_zone
-  vpc_id            = tencentcloud_vpc.biancheng101-vpc.id
+  vpc_id            = tencentcloud_vpc.test-vpc.id
   cidr_block        = "10.0.0.0/28"
 }
 
-resource "tencentcloud_kubernetes_cluster" "biancheng101_cluster" {
+resource "tencentcloud_kubernetes_cluster" "test_cluster" {
   cluster_name            = "测试集群"
-  vpc_id                  = tencentcloud_vpc.biancheng101-vpc.id
+  vpc_id                  = tencentcloud_vpc.test-vpc.id
   cluster_cidr            = "192.168.0.0/16"
   cluster_max_pod_num     = 32
   cluster_max_service_num = 128
@@ -32,7 +32,7 @@ resource "tencentcloud_kubernetes_cluster" "biancheng101_cluster" {
     internet_charge_type       = "TRAFFIC_POSTPAID_BY_HOUR"
     internet_max_bandwidth_out = 1
     public_ip_assigned         = true
-    subnet_id                  = tencentcloud_subnet.biancheng101-vpv-subnet.id
+    subnet_id                  = tencentcloud_subnet.test-vpv-subnet.id
     use_data                   = "dGVzdA=="
     password                   = "test123"
   }
