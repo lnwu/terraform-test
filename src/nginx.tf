@@ -76,3 +76,7 @@ resource "kubernetes_config_map" "nginx-config" {
   }
 }
 
+output "lb_ip" {
+  value = "${kubernetes_service.test-app.load_balancer_ingress.0.ip}"
+}
+
